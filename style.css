@@ -1,0 +1,208 @@
+:root {
+    --primary-color: #4F200D;
+    --secondary-color: #FFD93D;
+    --accent-color: #FF9A00;
+    --background-color: #F6F1E9;
+    --card-background: #ffffff;
+    --text-color: #212121;
+    --light-text-color: #757575;
+    --border-color: #e0e0e0;
+}
+
+body {
+    background-color: var(--background-color);
+    padding-top: 70px;
+}
+
+/* --- New Navbar Styling --- */
+.custom-navbar {
+    background: linear-gradient(90deg, #5a2d0c 0%, #7a3f0f 100%) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+    padding: 0.5rem 1rem;
+    border-bottom: 3px solid var(--secondary-color);
+}
+
+.custom-navbar .navbar-brand {
+    font-weight: 700;
+    color: white !important;
+    font-size: 1.6rem;
+    letter-spacing: 1.5px;
+    transition: color 0.3s ease;
+}
+
+.custom-navbar .navbar-brand:hover {
+    color: var(--secondary-color) !important;
+}
+
+.custom-navbar .nav-link {
+    color: white !important;
+    font-weight: 600;
+    margin-left: 1rem;
+    padding-bottom: 0.25rem;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.custom-navbar .nav-link::after {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--secondary-color);
+    transition: width 0.3s ease;
+}
+
+.custom-navbar .nav-link:hover {
+    color: var(--secondary-color) !important;
+}
+
+.custom-navbar .nav-link:hover::after {
+    width: 100%;
+}
+
+.navbar-toggler {
+    border: none !important;
+    background-color: rgba(255, 255, 255, 0.15) !important;
+    transition: background-color 0.3s ease;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+}
+
+.navbar-toggler:hover {
+    background-color: var(--secondary-color) !important;
+}
+
+.navbar-toggler:focus {
+    box-shadow: none !important;
+}
+
+.navbar-toggler .fas.fa-bars {
+    color: white;
+    font-size: 1.25rem;
+}
+
+#language-select {
+    background-color: var(--primary-color) !important;
+    color: white !important;
+    border: 1px solid rgba(255, 255, 255, 0.5) !important;
+    border-radius: 5px !important;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    margin-left: 1rem;
+    padding: 0.25rem 0.5rem;
+    min-width: 110px;
+}
+
+#language-select:hover, #language-select:focus {
+    background-color: #7a3f0f !important;
+    border-color: var(--secondary-color) !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+#language-select option {
+    background-color: var(--primary-color);
+    color: white;
+}
+/* --- End Navbar Styling --- */
+
+.hero-section {
+    background: linear-gradient(to right, var(--background-color), #fff8e1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card {
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.text-secondary {
+    color: var(--secondary-color) !important;
+}
+
+.btn-primary {
+    background-color: var(--accent-color) !important;
+    border-color: var(--accent-color) !important;
+    color: var(--primary-color) !important;
+}
+
+.btn-primary:hover {
+    background-color: #ff8c00 !important;
+    border-color: #ff8c00 !important;
+    color: white !important;
+}
+
+.footer {
+    background-color: var(--primary-color);
+}
+
+/* Chatbot Specific Styles */
+#chatbot-button {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 60px;
+    height: 60px;
+    background-color: var(--accent-color);
+    z-index: 1000;
+    transition: transform 0.2s;
+}
+
+#chatbot-button:hover {
+    transform: scale(1.1);
+    background-color: #ff8c00 !important;
+}
+
+#chatbot-container {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 380px;
+    height: 520px;
+    z-index: 1001;
+    display: none;
+    flex-direction: column;
+}
+
+@media (max-width: 768px) {
+    #chatbot-container {
+        bottom: 1rem;
+        right: 1rem;
+        width: 90%;
+        height: 80vh;
+        max-height: 600px;
+    }
+}
+
+.chatbot-message {
+    padding: 1rem;
+    border-radius: 1rem;
+    max-width: 80%;
+    word-wrap: break-word;
+}
+
+.user-message {
+    background-color: var(--background-color);
+    align-self: flex-end;
+}
+
+.bot-message {
+    background-color: #f0f0f0;
+    align-self: flex-start;
+}
+
+.card-footer {
+    background-color: #fff;
+    border-top: 1px solid #e0e0e0;
+}
