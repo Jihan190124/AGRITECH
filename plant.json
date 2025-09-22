@@ -1,0 +1,463 @@
+{
+  "plants": [
+    {
+      "id": 1,
+      "name": "Tulsi",
+      "moisture_range": [40, 70],
+      "watering_interval_days": 2,
+      "sunlight": "Direct sunlight",
+      "temperature_range": [20, 35],
+      "notes": "Water in the morning. Avoid waterlogging."
+    },
+    {
+      "id": 2,
+      "name": "Aloe Vera",
+      "moisture_range": [20, 40],
+      "watering_interval_days": 7,
+      "sunlight": "Indirect sunlight",
+      "temperature_range": [15, 35],
+      "notes": "Let soil dry completely between watering."
+    },
+    {
+      "id": 3,
+      "name": "Money Plant",
+      "moisture_range": [50, 70],
+      "watering_interval_days": 3,
+      "sunlight": "Indirect sunlight",
+      "temperature_range": [18, 30],
+      "notes": "Keep soil slightly moist. No direct sun."
+    },
+    {
+      "id": 4,
+      "name": "Snake Plant",
+      "moisture_range": [20, 40],
+      "watering_interval_days": 10,
+      "sunlight": "Low to bright indirect light",
+      "temperature_range": [10, 30],
+      "notes": "Very low maintenance. Avoid overwatering."
+    },
+    {
+      "id": 5,
+      "name": "Peace Lily",
+      "moisture_range": [50, 80],
+      "watering_interval_days": 4,
+      "sunlight": "Filtered sunlight",
+      "temperature_range": [18, 28],
+      "notes": "Mist leaves occasionally. Keep moist but not soggy."
+    }
+        ,
+    {
+      "id": 6,
+      "name": "Spider Plant",
+      "moisture_range": [40, 60],
+      "watering_interval_days": 5,
+      "sunlight": "Indirect sunlight",
+      "temperature_range": [15, 27],
+      "notes": "Water when the top inch of soil is dry."
+    },
+    {
+      "id": 7,
+      "name": "Rose",
+      "moisture_range": [50, 80],
+      "watering_interval_days": 2,
+      "sunlight": "Full sunlight",
+      "temperature_range": [18, 30],
+      "notes": "Requires rich soil and regular watering."
+    },
+    {
+      "id": 8,
+      "name": "Marigold",
+      "moisture_range": [40, 70],
+      "watering_interval_days": 3,
+      "sunlight": "Full sunlight",
+      "temperature_range": [20, 35],
+      "notes": "Well-drained soil is best. Avoid overhead watering."
+    },
+    {
+      "id": 9,
+      "name": "Lavender",
+      "moisture_range": [20, 40],
+      "watering_interval_days": 6,
+      "sunlight": "Full sunlight",
+      "temperature_range": [10, 30],
+      "notes": "Avoid humidity. Needs well-draining soil."
+    },
+    {
+      "id": 10,
+      "name": "Mint",
+      "moisture_range": [50, 80],
+      "watering_interval_days": 2,
+      "sunlight": "Partial sunlight",
+      "temperature_range": [15, 30],
+      "notes": "Keep soil moist. Spreads quickly."
+    }
+        ,
+    {
+      "id": 11,
+      "name": "Neem",
+      "moisture_range": [30, 60],
+      "watering_interval_days": 4,
+      "sunlight": "Full sunlight",
+      "temperature_range": [20, 40],
+      "notes": "Drought-tolerant once mature. Water moderately."
+    },
+    {
+      "id": 12,
+      "name": "Curry Leaf",
+      "moisture_range": [40, 70],
+      "watering_interval_days": 3,
+      "sunlight": "Full sunlight",
+      "temperature_range": [22, 35],
+      "notes": "Needs warm climate and regular watering."
+    },
+    {
+      "id": 13,
+      "name": "Pothos",
+      "moisture_range": [40, 60],
+      "watering_interval_days": 5,
+      "sunlight": "Low to bright indirect light",
+      "temperature_range": [18, 30],
+      "notes": "Easy to grow indoors. Avoid soggy soil."
+    },
+    {
+      "id": 14,
+      "name": "Bamboo Palm",
+      "moisture_range": [50, 80],
+      "watering_interval_days": 3,
+      "sunlight": "Indirect light",
+      "temperature_range": [20, 30],
+      "notes": "Likes humid air. Mist often indoors."
+    },
+    {
+      "id": 15,
+      "name": "Jasmine",
+      "moisture_range": [40, 70],
+      "watering_interval_days": 2,
+      "sunlight": "Full to partial sunlight",
+      "temperature_range": [20, 32],
+      "notes": "Water regularly during bloom season."
+    }
+        ,
+    {
+      "id": 16,
+      "name": "Lemon Tree",
+      "moisture_range": [50, 75],
+      "watering_interval_days": 3,
+      "sunlight": "Full sunlight",
+      "temperature_range": [20, 38],
+      "notes": "Needs well-draining soil. Do not overwater."
+    },
+    {
+      "id": 17,
+      "name": "Chili Plant",
+      "moisture_range": [45, 70],
+      "watering_interval_days": 3,
+      "sunlight": "Full sunlight",
+      "temperature_range": [22, 35],
+      "notes": "Water at base; avoid wetting leaves."
+    },
+    {
+      "id": 18,
+      "name": "Coriander",
+      "moisture_range": [40, 70],
+      "watering_interval_days": 2,
+      "sunlight": "Partial to full sunlight",
+      "temperature_range": [15, 30],
+      "notes": "Needs consistent moisture for good growth."
+    },
+    {
+      "id": 19,
+      "name": "Spinach",
+      "moisture_range": [50, 80],
+      "watering_interval_days": 2,
+      "sunlight": "Partial sunlight",
+      "temperature_range": [10, 25],
+      "notes": "Prefers cooler temperatures. Keep soil moist."
+    },
+    {
+      "id": 20,
+      "name": "Fenugreek",
+      "moisture_range": [40, 70],
+      "watering_interval_days": 2,
+      "sunlight": "Full sunlight",
+      "temperature_range": [15, 35],
+      "notes": "Water daily in hot weather. Fast-growing."
+    }
+    ,
+    {
+      "id": 21,
+      "name": "Mustard Greens",
+      "moisture_range": [50, 75],
+      "watering_interval_days": 2,
+      "sunlight": "Full sunlight",
+      "temperature_range": [10, 25],
+      "notes": "Keep soil evenly moist for tender leaves."
+    },
+    {
+      "id": 22,
+      "name": "Bitter Gourd",
+      "moisture_range": [60, 80],
+      "watering_interval_days": 3,
+      "sunlight": "Full sunlight",
+      "temperature_range": [20, 35],
+      "notes": "Needs trellis support. Loves warm, moist conditions."
+    },
+    {
+      "id": 23,
+      "name": "Bottle Gourd",
+      "moisture_range": [60, 80],
+      "watering_interval_days": 3,
+      "sunlight": "Full sunlight",
+      "temperature_range": [20, 35],
+      "notes": "Grows best in fertile, moist soil. Provide vine support."
+    },
+    {
+      "id": 24,
+      "name": "Cabbage",
+      "moisture_range": [50, 75],
+      "watering_interval_days": 2,
+      "sunlight": "Full sunlight",
+      "temperature_range": [10, 25],
+      "notes": "Requires consistent watering. Keep soil firm."
+    },
+    {
+      "id": 25,
+      "name": "Cauliflower",
+      "moisture_range": [50, 75],
+      "watering_interval_days": 2,
+      "sunlight": "Full sunlight",
+      "temperature_range": [15, 25],
+      "notes": "Needs cool weather. Avoid water on curds."
+    }
+    ,
+    {
+      "id": 26,
+      "name": "Carrot",
+      "moisture_range": [45, 70],
+      "watering_interval_days": 3,
+      "sunlight": "Full sunlight",
+      "temperature_range": [10, 25],
+      "notes": "Deep watering promotes root growth. Avoid overwatering."
+    },
+    {
+      "id": 27,
+      "name": "Beetroot",
+      "moisture_range": [50, 75],
+      "watering_interval_days": 3,
+      "sunlight": "Full sunlight",
+      "temperature_range": [10, 25],
+      "notes": "Requires moist, loose soil. Avoid water stagnation."
+    },
+    {
+      "id": 28,
+      "name": "Onion",
+      "moisture_range": [40, 60],
+      "watering_interval_days": 4,
+      "sunlight": "Full sunlight",
+      "temperature_range": [12, 28],
+      "notes": "Less water during bulb formation. Well-drained soil preferred."
+    },
+    {
+      "id": 29,
+      "name": "Garlic",
+      "moisture_range": [40, 60],
+      "watering_interval_days": 5,
+      "sunlight": "Full sunlight",
+      "temperature_range": [12, 28],
+      "notes": "Stop watering 2 weeks before harvest. Avoid soggy soil."
+    },
+    {
+      "id": 30,
+      "name": "Brinjal",
+      "moisture_range": [60, 80],
+      "watering_interval_days": 2,
+      "sunlight": "Full sunlight",
+      "temperature_range": [20, 35],
+      "notes": "Needs rich, moist soil. Remove weeds regularly."
+    }
+    ,
+    {
+      "id": 31,
+      "name": "Pumpkin",
+      "moisture_range": [60, 85],
+      "watering_interval_days": 3,
+      "sunlight": "Full sunlight",
+      "temperature_range": [20, 35],
+      "notes": "Loves deep watering. Needs space to spread."
+    },
+    {
+      "id": 32,
+      "name": "Radish",
+      "moisture_range": [50, 75],
+      "watering_interval_days": 2,
+      "sunlight": "Full to partial sunlight",
+      "temperature_range": [10, 25],
+      "notes": "Quick growing. Keep soil moist but not soggy."
+    },
+    {
+      "id": 33,
+      "name": "Turnip",
+      "moisture_range": [50, 75],
+      "watering_interval_days": 2,
+      "sunlight": "Full sunlight",
+      "temperature_range": [10, 25],
+      "notes": "Best in cool weather. Loamy, well-drained soil preferred."
+    },
+    {
+      "id": 34,
+      "name": "Peas",
+      "moisture_range": [40, 65],
+      "watering_interval_days": 3,
+      "sunlight": "Full sunlight",
+      "temperature_range": [12, 25],
+      "notes": "Keep soil evenly moist. Avoid wetting foliage."
+    },
+    {
+      "id": 35,
+      "name": "Lady Finger",
+      "moisture_range": [50, 80],
+      "watering_interval_days": 2,
+      "sunlight": "Full sunlight",
+      "temperature_range": [20, 35],
+      "notes": "Loves warm weather. Requires regular watering during flowering."
+    }
+    ,
+    {
+      "id": 36,
+      "name": "Capsicum",
+      "moisture_range": [50, 75],
+      "watering_interval_days": 3,
+      "sunlight": "Full sunlight",
+      "temperature_range": [18, 30],
+      "notes": "Requires consistent watering and rich soil."
+    },
+    {
+      "id": 37,
+      "name": "Cucumber",
+      "moisture_range": [60, 85],
+      "watering_interval_days": 2,
+      "sunlight": "Full sunlight",
+      "temperature_range": [20, 35],
+      "notes": "Requires frequent watering. Trellis helps fruit stay clean."
+    },
+    {
+      "id": 38,
+      "name": "Watermelon",
+      "moisture_range": [60, 85],
+      "watering_interval_days": 3,
+      "sunlight": "Full sunlight",
+      "temperature_range": [22, 38],
+      "notes": "Heavy water needs until fruit ripens, then reduce watering."
+    },
+    {
+      "id": 39,
+      "name": "Muskmelon",
+      "moisture_range": [60, 85],
+      "watering_interval_days": 3,
+      "sunlight": "Full sunlight",
+      "temperature_range": [22, 35],
+      "notes": "Likes warm, moist soil. Reduce watering during ripening."
+    },
+    {
+      "id": 40,
+      "name": "Strawberry",
+      "moisture_range": [60, 80],
+      "watering_interval_days": 2,
+      "sunlight": "Full sunlight",
+      "temperature_range": [15, 30],
+      "notes": "Mulch soil to retain moisture and keep berries clean."
+    }
+    ,
+    {
+      "id": 41,
+      "name": "Guava",
+      "moisture_range": [40, 70],
+      "watering_interval_days": 4,
+      "sunlight": "Full sunlight",
+      "temperature_range": [20, 35],
+      "notes": "Requires less water once mature. Avoid water stagnation."
+    },
+    {
+      "id": 42,
+      "name": "Papaya",
+      "moisture_range": [50, 80],
+      "watering_interval_days": 3,
+      "sunlight": "Full sunlight",
+      "temperature_range": [22, 38],
+      "notes": "Needs well-draining soil. Sensitive to overwatering."
+    },
+    {
+      "id": 43,
+      "name": "Banana",
+      "moisture_range": [60, 85],
+      "watering_interval_days": 2,
+      "sunlight": "Full sunlight",
+      "temperature_range": [24, 38],
+      "notes": "Loves moisture. Mulch well around base."
+    },
+    {
+      "id": 44,
+      "name": "Pomegranate",
+      "moisture_range": [40, 65],
+      "watering_interval_days": 4,
+      "sunlight": "Full sunlight",
+      "temperature_range": [20, 35],
+      "notes": "Drought-tolerant once established. Deep watering preferred."
+    },
+    {
+      "id": 45,
+      "name": "Mango",
+      "moisture_range": [30, 60],
+      "watering_interval_days": 5,
+      "sunlight": "Full sunlight",
+      "temperature_range": [25, 40],
+      "notes": "Water young trees regularly. Avoid watering when flowering."
+    }
+    ,
+    {
+      "id": 46,
+      "name": "Jackfruit",
+      "moisture_range": [50, 75],
+      "watering_interval_days": 4,
+      "sunlight": "Full sunlight",
+      "temperature_range": [20, 35],
+      "notes": "Water young trees frequently. Mulch to retain moisture."
+    },
+    {
+      "id": 47,
+      "name": "Litchi",
+      "moisture_range": [60, 85],
+      "watering_interval_days": 3,
+      "sunlight": "Full sunlight",
+      "temperature_range": [20, 35],
+      "notes": "Needs humid conditions. Avoid dry spells during flowering."
+    },
+    {
+      "id": 48,
+      "name": "Sapota",
+      "moisture_range": [50, 75],
+      "watering_interval_days": 4,
+      "sunlight": "Full sunlight",
+      "temperature_range": [22, 35],
+      "notes": "Water well during fruiting season."
+    },
+    {
+      "id": 49,
+      "name": "Custard Apple",
+      "moisture_range": [40, 70],
+      "watering_interval_days": 5,
+      "sunlight": "Full sunlight",
+      "temperature_range": [20, 35],
+      "notes": "Avoid overwatering. Needs warm, dry climate for fruit set."
+    },
+    {
+      "id": 50,
+      "name": "Jamun",
+      "moisture_range": [40, 70],
+      "watering_interval_days": 4,
+      "sunlight": "Full sunlight",
+      "temperature_range": [22, 35],
+      "notes": "Drought-tolerant. Water more in summer."
+    }
+  ]
+}
