@@ -1,72 +1,34 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const chatbotButton = document.getElementById('chatbot-button');
-    const chatbotContainer = document.getElementById('chatbot-container');
-    const closeChatbotButton = document.getElementById('close-chatbot');
-    const sendButton = document.getElementById('send-button');
-    const userInput = document.getElementById('user-input');
-    const chatbotMessages = document.getElementById('chatbot-messages');
     const languageSelect = document.getElementById('language-select');
+    console.log('languageSelect element:', languageSelect);
     const refreshPricesButton = document.getElementById('refresh-prices');
-
-    // --- Core Chatbot Functionality ---
-    chatbotButton.addEventListener('click', () => {
-        chatbotContainer.style.display = 'flex';
-    });
-
-    closeChatbotButton.addEventListener('click', () => {
-        chatbotContainer.style.display = 'none';
-    });
-
-    // Function to add a message to the chatbot
-    function addMessage(text, sender) {
-        const messageDiv = document.createElement('div');
-        messageDiv.classList.add('chatbot-message', `${sender}-message`, 'my-2', 'p-3');
-        messageDiv.textContent = text;
-        chatbotMessages.appendChild(messageDiv);
-        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-    }
-
-    // Handle user input
-    sendButton.addEventListener('click', () => {
-        const text = userInput.value.trim();
-        if (text !== '') {
-            addMessage(text, 'user');
-            setTimeout(() => {
-                addMessage('Thinking...', 'bot');
-                setTimeout(() => {
-                    const response = getAIResponse(text);
-                    chatbotMessages.lastChild.textContent = response;
-                }, 1000);
-            }, 500);
-            userInput.value = '';
-        }
-    });
-
-    // Listen for Enter key in the input field
-    userInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            sendButton.click();
-        }
-    });
 
     // --- Language Translation ---
     function translatePage(lang) {
-        document.querySelectorAll('[data-en], [data-hi]').forEach(element => {
+        console.log('Translating page to:', lang);
+        document.querySelectorAll('[data-en]').forEach(element => {
             const translatedText = element.getAttribute(`data-${lang}`);
             if (translatedText) {
+                console.log('Updating element:', element, 'to:', translatedText);
                 if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
                     element.setAttribute('placeholder', translatedText);
                 } else {
                     element.textContent = translatedText;
                 }
+            } else {
+                console.log('No translation for element:', element, 'in lang:', lang);
             }
         });
     }
 
     languageSelect.addEventListener('change', (e) => {
+        console.log('Language select changed to:', e.target.value);
         const selectedLang = e.target.value;
         translatePage(selectedLang);
-    });
+    }, { capture: true });
+
+    // Set initial language to English
+    translatePage('en');
 
     // --- Other Functionality ---
     refreshPricesButton.addEventListener('click', () => {
