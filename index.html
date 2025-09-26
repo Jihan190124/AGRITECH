@@ -112,23 +112,30 @@
         </div>
     </footer>
 
-    <button id="chatbot-button" class="btn rounded-circle shadow-lg d-flex align-items-center justify-content-center" data-en="Open Chatbot" data-hi="चैटबॉट खोलें" data-gu="ચેટબોટ ખોલો" data-ma="चॅटबॉट उघडा" data-pu="ਚੈਟਬੋਟ ਖੋਲ੍ਹੋ">
-        <i class="fas fa-robot text-white fa-2x"></i>
-    </button>
+    <!-- 🔹 Chatbot Button -->
+<button id="chatbot-btn" class="btn rounded-circle shadow-lg d-flex align-items-center justify-content-center" 
+  style="position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; background: #007bff; border: none; z-index: 1100;">
+  <i class="fas fa-robot text-white fa-2x"></i>
+</button>
 
-    <div id="chatbot-container" class="shadow-lg">
-        <div class="card h-100">
-            <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
-                <h5 class="mb-0" data-en="CropBot" data-hi="फसल-बॉट" data-gu="પાક-બોટ" data-ma="पीक-बॉट" data-pu="ਫਸਲ-ਬੋਟ">CropBot</h5>
-                <button id="close-chatbot" class="btn btn-link text-white p-0"><i class="fas fa-times fa-lg"></i></button>
-            </div>
-            <div class="card-body d-flex flex-column" id="chatbot-messages"></div>
-            <div class="card-footer d-flex p-2">
-                <input type="text" id="user-input" class="form-control me-2" data-en="Ask about your crops..." data-hi="अपनी फसलों के बारे में पूछें..." data-gu="તમારા પાક વિશે પૂછો..." data-ma="तुमच्या पिकांबद्दल विचारा..." data-pu="ਆਪਣੀਆਂ ਫਸਲਾਂ ਬਾਰੇ ਪੁੱਛੋ..." placeholder="Ask about your crops...">
-                <button id="send-button" class="btn btn-primary"><i class="fas fa-paper-plane"></i></button>
-            </div>
-        </div>
-    </div>
+<!-- 🔹 Chatbot Container with iframe -->
+<div id="chatbot-container" style="position: fixed; bottom: 90px; right: 20px; width: 350px; height: 500px; display: none; z-index: 1100;">
+  <iframe id="chatbot-iframe" src="chatbot.html" 
+    style="width:100%; height:100%; border:none; border-radius:15px; box-shadow:0 0 15px rgba(0,0,0,0.3);"></iframe>
+</div>
+
+<script>
+window.addEventListener("DOMContentLoaded", () => {
+  const chatbotBtn = document.getElementById("chatbot-btn");
+  const chatbotContainer = document.getElementById("chatbot-container");
+
+  chatbotBtn.onclick = () => {
+    chatbotContainer.style.display =
+      chatbotContainer.style.display === "none" ? "block" : "none";
+  };
+});
+</script>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
