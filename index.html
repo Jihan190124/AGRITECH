@@ -56,8 +56,8 @@
                     <div class="card p-4 text-center h-100">
                         <i class="fas fa-leaf fa-3x mb-3 text-secondary"></i>
                         <h3 data-en="Soil & Fertilizer Guidance" data-hi="मिट्टी और उर्वरक मार्गदर्शन" data-gu="માટી અને ખાતર માર્ગદર્શન" data-ma="माती आणि खत मार्गदर्शन" data-pu="ਮਿੱਟੀ ਅਤੇ ਖਾਦ ਦੀ ਸਲਾਹ">Soil & Fertilizer Guidance</h3>
-                        <p data-en="Get personalized recommendations based on your soil type." data-hi="अपनी मिट्टी के प्रकार के आधार पर व्यक्तिगत सिफारिशें प्राप्त करें।" data-gu="તમારી માટીના પ્રકાર મુજબ વ્યક્તિગત સલાહ મેળવો." data-ma="तुमच्या मातीच्या प्रकारानुसार वैयक्तिक शिफारसी मिळवा." data-pu="ਆਪਣੀ ਮਿੱਟੀ ਦੇ ਅਨੁਸਾਰ ਸਲਾਹ ਲਵੋ।">Get personalized recommendations based on your soil type.</p>
-                        <button class="btn btn-primary mt-auto" data-en="Check Soil Health" data-hi="मिट्टी की सेहत जांचें" data-gu="માટીની તંદુરસ્તી તપાસો" data-ma="मातीची आरोग्य तपासणी करा" data-pu="ਮਿੱਟੀ ਦੀ ਸਿਹਤ ਜਾਂਚੋ">Check Soil Health</button>
+                        <p data-en="Get personalized recommendations based on your crop and soil type." data-hi="अपनी फसल और मिट्टी के प्रकार के आधार पर व्यक्तिगत सिफारिशें प्राप्त करें।" data-gu="તમારી પાક અને માટીના પ્રકાર મુજબ વ્યક્તિગત સલાહ મેળવો." data-ma="तुमच्या पिक आणि मातीच्या प्रकारानुसार वैयक्तिक शिफारसी मिळवा." data-pu="ਆਪਣੀ ਫਸਲ ਅਤੇ ਮਿੱਟੀ ਦੇ ਅਨੁਸਾਰ ਸਲਾਹ ਲਵੋ।">Get personalized recommendations based on your crop and soil type.</p>
+                        <button class="btn btn-primary mt-auto" id="check-soil-btn" data-en="Get Recommendations" data-hi="सिफारिशें प्राप्त करें" data-gu="સલાહ મેળવો" data-ma="शिफारसी मिळवा" data-pu="ਸਲਾਹ ਲਵੋ">Get Recommendations</button>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6">
@@ -77,6 +77,7 @@
                         <p data-en="Upload a photo to instantly identify crop issues." data-hi="फसल की समस्याओं को तुरंत पहचानने के लिए एक फोटो अपलोड करें।" data-gu="પાકની સમસ્યાઓ ઓળખવા માટે ફોટો અપલોડ કરો." data-ma="पिकांच्या समस्या ओळखण्यासाठी फोटो अपलोड करा." data-pu="ਫਸਲ ਦੇ ਮਸਲਿਆਂ ਦੀ ਪਛਾਣ ਲਈ ਇੱਕ ਫੋਟੋ ਅੱਪਲੋਡ ਕਰੋ।">Upload a photo to instantly identify crop issues.</p>
                         <input type="file" id="pest-image-upload" accept="image/*" class="d-none">
                         <button class="btn btn-primary mt-auto" onclick="document.getElementById('pest-image-upload').click()" data-en="Upload Image" data-hi="छवि अपलोड करें" data-gu="છબી અપલોડ કરો" data-ma="फोटो अपलोड करा" data-pu="ਫੋਟੋ ਅੱਪਲੋਡ ਕਰੋ">Upload Image</button>
+                        <div id="pest-result" class="mt-3"></div>
                     </div>
                 </div>
             </div>
@@ -85,8 +86,31 @@
         <section id="market" class="mb-5">
             <h2 class="text-center mb-4" data-en="Market Price Tracking" data-hi="बाजार मूल्य ट्रैकिंग" data-gu="બજાર ભાવ ટ્રેકિંગ" data-ma="बाजार भाव ट्रॅकिंग" data-pu="ਮਾਰਕੀਟ ਕੀਮਤ ਦੀ ਟਰੈਕਿੰਗ">Market Price Tracking</h2>
             <div class="card p-4 text-center">
-                <p data-en="Commodity Name:" data-hi="वस्तु का नाम:" data-gu="વસ્તુનું નામ:" data-ma="वस्तूचे नाव:" data-pu="ਵਸਤੂ ਦਾ ਨਾਮ:">Commodity Name: <span id="market-commodity" class="fw-bold text-primary">Wheat</span></p>
+                <div class="mb-3">
+                    <label for="commodity-select" class="form-label" data-en="Select Commodity:" data-hi="वस्तु चुनें:" data-gu="વસ્તુ પસંદ કરો:" data-ma="वस्तू निवडा:" data-pu="ਵਸਤੂ ਚੁਣੋ:">Select Commodity:</label>
+                    <select id="commodity-select" class="form-select w-50 mx-auto">
+                        <option value="wheat" data-en="Wheat" data-hi="गेहूं" data-gu="ઘઉં" data-ma="गहू" data-pu="ਗਹੂੰ">Wheat</option>
+                        <option value="rice" data-en="Rice" data-hi="चावल" data-gu="ચોખા" data-ma="भात" data-pu="ਚਾਵਲ">Rice</option>
+                        <option value="maize" data-en="Maize" data-hi="मक्का" data-gu="મકાઈ" data-ma="मका" data-pu="ਮੱਕੀ">Maize</option>
+                        <option value="barley" data-en="Barley" data-hi="जौ" data-gu="જવ" data-ma="बार्ली" data-pu="ਜਉ">Barley</option>
+                        <option value="sorghum" data-en="Sorghum" data-hi="ज्वार" data-gu="જુવાર" data-ma="ज्वारी" data-pu="ਜੋਵਾਰ">Sorghum</option>
+                        <option value="millet" data-en="Millet" data-hi="बाजरा" data-gu="બાજરી" data-ma="बाजरी" data-pu="ਬਾਜਰਾ">Millet</option>
+                        <option value="cotton" data-en="Cotton" data-hi="कपास" data-gu="કપાસ" data-ma="कापूस" data-pu="ਕਪਾਹ">Cotton</option>
+                        <option value="sugarcane" data-en="Sugarcane" data-hi="गन्ना" data-gu="શેરડી" data-ma="उस" data-pu="ਗੰਨਾ">Sugarcane</option>
+                        <option value="soybean" data-en="Soybean" data-hi="सोयाबीन" data-gu="સોયાબીન" data-ma="सोयाबीन" data-pu="ਸੋਯਾਬੀਨ">Soybean</option>
+                        <option value="groundnut" data-en="Groundnut" data-hi="मूंगफली" data-gu="મગફળી" data-ma="शेंगदाणे" data-pu="ਮੂੰਗਫਲੀ">Groundnut</option>
+                        <option value="sunflower" data-en="Sunflower" data-hi="सूरजमुखी" data-gu="સૂર્યમુખી" data-ma="सूर्यफूल" data-pu="ਸੂਰਜਮੁਖੀ">Sunflower</option>
+                        <option value="mustard" data-en="Mustard" data-hi="सरसों" data-gu="મેથી" data-ma="मोहरी" data-pu="ਸਰ੍ਹੋਂ">Mustard</option>
+                        <option value="lentils" data-en="Lentils" data-hi="दाल" data-gu="ડાળ" data-ma="डाळ" data-pu="ਮਸੂਰ">Lentils</option>
+                        <option value="tomato" data-en="Tomato" data-hi="टमाटर" data-gu="ટામેટા" data-ma="टोमॅटो" data-pu="ਟਮਾਟਰ">Tomato</option>
+                        <option value="potato" data-en="Potato" data-hi="आलू" data-gu="બટાકા" data-ma="बटाटस" data-pu="ਆਲੂ">Potato</option>
+                        <option value="onion" data-en="Onion" data-hi="प्याज" data-gu="ડુંગળી" data-ma="कांदा" data-pu="ਪਿਆਜ਼">Onion</option>
+                        <option value="apple" data-en="Apple" data-hi="सेब" data-gu="સફરજન" data-ma=" सफरचंद" data-pu="ਸੇਬ">Apple</option>
+                        <option value="banana" data-en="Banana" data-hi="केला" data-gu="કેળા" data-ma="केळी" data-pu="ਕੇਲਾ">Banana</option>
+                    </select>
+                </div>
                 <p data-en="Current Price:" data-hi="वर्तमान मूल्य:" data-gu="વર્તમાન ભાવ:" data-ma="सध्याची किंमत:" data-pu="ਮੌਜੂਦਾ ਕੀਮਤ:">Current Price: <span id="market-price" class="fw-bold text-primary">--</span></p>
+                <div id="lowest-price-link" class="mt-2"></div>
                 <p data-en="Last Updated:" data-hi="पिछला अद्यतन:" data-gu="છેલ્લું અપડેટ:" data-ma="शेवटचे अपडेट:" data-pu="ਆਖਰੀ ਅੱਪਡੇਟ:">Last Updated: <span id="market-last-updated" class="fw-bold text-primary">--</span></p>
                 <button class="btn btn-primary mt-3 w-50 mx-auto" id="refresh-prices" data-en="Refresh Prices" data-hi="मूल्य ताज़ा करें" data-gu="ભાવ તાજા કરો" data-ma="किंमत ताजे करा" data-pu="ਕੀਮਤਾਂ ਤਾਜ਼ਾ ਕਰੋ">Refresh Prices</button>
             </div>
@@ -135,6 +159,52 @@ window.addEventListener("DOMContentLoaded", () => {
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@google/generative-ai@0.2.0/dist/index.min.js"></script>
     <script src="script.js"></script>
+
+    <!-- Soil Recommendation Modal -->
+    <div class="modal fade" id="soilModal" tabindex="-1" aria-labelledby="soilModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="soilModalLabel" data-en="Fertilizer Recommendations" data-hi="उर्वरक सिफारिशें" data-gu="ખાતર સલાહ" data-ma="खत शिफारसी" data-pu="ਖਾਦ ਸਲਾਹ">Fertilizer Recommendations</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="crop-select" class="form-label" data-en="Select Crop:" data-hi="फसल चुनें:" data-gu="પાક પસંદ કરો:" data-ma="पिक निवडा:" data-pu="ਫਸਲ ਚੁਣੋ:">Select Crop:</label>
+              <select id="crop-select" class="form-select">
+                <option value="wheat" data-en="Wheat" data-hi="गेहूं" data-gu="ઘઉં" data-ma="गहू" data-pu="ਗਹੂੰ">Wheat</option>
+                <option value="rice" data-en="Rice" data-hi="चावल" data-gu="ચોખા" data-ma="भात" data-pu="ਚਾਵਲ">Rice</option>
+                <option value="maize" data-en="Maize" data-hi="मक्का" data-gu="મકાઈ" data-ma="मका" data-pu="ਮੱਕੀ">Maize</option>
+                <option value="barley" data-en="Barley" data-hi="जौ" data-gu="જવ" data-ma="बार्ली" data-pu="ਜਉ">Barley</option>
+                <option value="sorghum" data-en="Sorghum" data-hi="ज्वार" data-gu="જુવાર" data-ma="ज्वारी" data-pu="ਜੋਵਾਰ">Sorghum</option>
+                <option value="millet" data-en="Millet" data-hi="बाजरा" data-gu="બાજરી" data-ma="बाजरी" data-pu="ਬਾਜਰਾ">Millet</option>
+                <option value="cotton" data-en="Cotton" data-hi="कपास" data-gu="કપાસ" data-ma="कापूस" data-pu="ਕਪਾਹ">Cotton</option>
+                <option value="sugarcane" data-en="Sugarcane" data-hi="गन्ना" data-gu="શેરડી" data-ma="उस" data-pu="ਗੰਨਾ">Sugarcane</option>
+                <option value="soybean" data-en="Soybean" data-hi="सोयाबीन" data-gu="સોયાબીન" data-ma="सोयाबीन" data-pu="ਸੋਯਾਬੀਨ">Soybean</option>
+                <option value="groundnut" data-en="Groundnut" data-hi="मूंगफली" data-gu="મગફળી" data-ma="शेंगदाणे" data-pu="ਮੂੰਗਫਲੀ">Groundnut</option>
+                <option value="sunflower" data-en="Sunflower" data-hi="सूरजमुखी" data-gu="સૂર્યમુખી" data-ma="सूर्यफूल" data-pu="ਸੂਰਜਮੁਖੀ">Sunflower</option>
+                <option value="mustard" data-en="Mustard" data-hi="सरसों" data-gu="મેથી" data-ma="मोहरी" data-pu="ਸਰ੍ਹੋਂ">Mustard</option>
+                <option value="lentils" data-en="Lentils" data-hi="दाल" data-gu="ડાળ" data-ma="डाळ" data-pu="ਮਸੂਰ">Lentils</option>
+                <option value="tomato" data-en="Tomato" data-hi="टमाटर" data-gu="ટામેટા" data-ma="टोमॅटो" data-pu="ਟਮਾਟਰ">Tomato</option>
+                <option value="potato" data-en="Potato" data-hi="आलू" data-gu="બટાકા" data-ma="बटाटस" data-pu="ਆਲੂ">Potato</option>
+                <option value="onion" data-en="Onion" data-hi="प्याज" data-gu="ડુંગળી" data-ma="कांदा" data-pu="ਪਿਆਜ਼">Onion</option>
+                <option value="apple" data-en="Apple" data-hi="सेब" data-gu="સફરજન" data-ma=" सफरचंद" data-pu="ਸੇਬ">Apple</option>
+                <option value="banana" data-en="Banana" data-hi="केला" data-gu="કેળા" data-ma="केळी" data-pu="ਕੇਲਾ">Banana</option>
+              </select>
+            </div>
+
+            <div id="recommendation-result" class="mt-3"></div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-en="Close" data-hi="बंद करें" data-gu="બંધ કરો" data-ma="बंद करा" data-pu="ਬੰਦ ਕਰੋ">Close</button>
+            <button type="button" class="btn btn-primary" id="get-recommendation-btn" data-en="Get Recommendation" data-hi="सिफारिश प्राप्त करें" data-gu="સલાહ મેળવો" data-ma="शिफारस मिळवा" data-pu="ਸਲਾਹ ਲਵੋ">Get Recommendation</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </body>
 </html>
