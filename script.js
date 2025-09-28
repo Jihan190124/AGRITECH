@@ -2,6 +2,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const languageSelect = document.getElementById('language-select');
     console.log('languageSelect element:', languageSelect);
     const refreshPricesButton = document.getElementById('refresh-prices');
+    const getWeatherBtn = document.getElementById('get-weather-btn');
+    const weatherCityInput = document.getElementById('weather-city');
+    const weatherInfoDiv = document.getElementById('weather-info');
 
     // --- Language Translation ---
     function translatePage(lang) {
@@ -38,16 +41,54 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateMarketPrices() {
         const marketPriceSpan = document.getElementById('market-price');
         const lastUpdatedSpan = document.getElementById('market-last-updated');
-
-        marketPriceSpan.textContent = 'Fetching...';
-        lastUpdatedSpan.textContent = '...';
-
+        if (marketPriceSpan) marketPriceSpan.textContent = 'Fetching...';
+        if (lastUpdatedSpan) lastUpdatedSpan.textContent = '...';
         setTimeout(() => {
             const randomPrice = (Math.random() * 1000 + 500).toFixed(2);
-            marketPriceSpan.textContent = `₹${randomPrice}`;
-            lastUpdatedSpan.textContent = new Date().toLocaleTimeString();
+            if (marketPriceSpan) marketPriceSpan.textContent = `₹${randomPrice}`;
+            if (lastUpdatedSpan) lastUpdatedSpan.textContent = new Date().toLocaleTimeString();
         }, 1500);
     }
+
+    // --- Weather Functionality ---
+    async function fetchWeather(city) {
+        const API_KEY = '92ec6d4c3c9b1f58a5546dbfdae9a801'; // Replace with your OpenWeatherMap API key
+        const url = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&appid=${API_KEY}&units=metric`;
+        
+        try {
+            weatherInfoDiv.innerHTML = '<div class="alert alert-info">Fetching weather...</div>';
+            const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const data = await response.json();
+            if (data.cod !== 200) {
+                throw new Error(data.message || 'City not found');
+            }
+            
+            const temp = Math.round(data.main.temp);
+            const description = data.weather[0].description;
+            const humidity = data.main.humidity;
+            const feelsLike = Math.round(data.main.feels_like);
+            
+            weatherInfoDiv.innerHTML = `
+                <div class="alert alert-success">
+                    <h5>${city}</h5>
+                    <p><strong>Temperature:</strong> ${temp}°C (Feels like: ${feelsLike}°C)</p>
+                    <p><strong>Conditions:</strong> ${description}</p>
+                    <p><strong>Humidity:</strong> ${humidity}%</p>
+                </div>
+            `;
+        } catch (error) {
+            weatherInfoDiv.innerHTML = `<div class="alert alert-danger">Error: ${error.message}. Please check the city name or API key.</div>`;
+            console.error('Weather fetch error:', error);
+        }
+    }
+
+    getWeatherBtn.addEventListener('click', () => {
+        const city = weatherCityInput.value.trim() || 'Ahmedabad';
+        fetchWeather(city);
+    });
 
     function getAIResponse(userQuery) {
         userQuery = userQuery.toLowerCase();
