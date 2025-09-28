@@ -1,4 +1,17 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Initialize Firebase
+    const firebaseConfig = {
+        apiKey: "AIzaSyCGQnWdci-4lwya38ToVhtI35zWwUuDz1U",
+        authDomain: "agritech-4e1af.firebaseapp.com",
+        projectId: "agritech-4e1af",
+        storageBucket: "agritech-4e1af.firebasestorage.app",
+        messagingSenderId: "87928629801",
+        appId: "1:87928629801:web:fdf1f1aa04b2eb55e74a38",
+        measurementId: "G-9VVG3NPN4W"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
     const languageSelect = document.getElementById('language-select');
     console.log('languageSelect element:', languageSelect);
     const refreshPricesButton = document.getElementById('refresh-prices');
@@ -9,8 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Gemini API constants (same as chatbot.html)
     const API_KEY = "AIzaSyCvCJfO2MtWa2zIPcB0sV1yD66plUAvtrc";
-    const MODEL_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
-
+    const MODEL_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent";
     // Soil & Fertilizer Guidance
     const checkSoilBtn = document.getElementById('check-soil-btn');
     const soilModal = new bootstrap.Modal(document.getElementById('soilModal'));
@@ -21,6 +33,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // Pest & Disease Detection
     const pestImageUpload = document.getElementById('pest-image-upload');
     const pestResult = document.getElementById('pest-result');
+
+    // Feedback Form
+    const feedbackForm = document.getElementById('feedback-form');
+    const feedbackName = document.getElementById('feedback-name');
+    const feedbackEmail = document.getElementById('feedback-email');
+    const feedbackMobile = document.getElementById('feedback-mobile');
+    const feedbackText = document.getElementById('feedback-text');
 
     // --- Language Translation ---
     function translatePage(lang) {
@@ -66,6 +85,37 @@ document.addEventListener('DOMContentLoaded', () => {
     translatePage('en');
     translateCommodityOptions('en');
 
+    // --- Feedback Form Submission ---
+    feedbackForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const name = feedbackName.value.trim();
+        const email = feedbackEmail.value.trim();
+        const mobile = feedbackMobile.value.trim();
+        const feedback = feedbackText.value.trim();
+
+        if (!name || !email || !mobile || !feedback) {
+            alert('Please fill in all fields.');
+            return;
+        }
+
+        try {
+            console.log('Attempting to save feedback to Firestore...');
+            await db.collection('feedback').add({
+                name: name,
+                email: email,
+                mobile: mobile,
+                feedback: feedback,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            });
+            console.log('Feedback saved successfully!');
+            alert('Thank you for your feedback!');
+            feedbackForm.reset();
+        } catch (error) {
+            console.error('Error saving feedback:', error);
+            alert(`Error submitting feedback: ${error.message}. Please try again.`);
+        }
+    });
+
     // --- Other Functionality ---
     refreshPricesButton.addEventListener('click', () => {
         updateMarketPrices();
@@ -85,42 +135,21 @@ document.addEventListener('DOMContentLoaded', () => {
         if (lastUpdatedSpan) lastUpdatedSpan.textContent = '...';
 
         try {
-            const currentLang = languageSelect.value;
-            const langMap = {
-                'en': 'English',
-                'hi': 'Hindi',
-                'gu': 'Gujarati',
-                'ma': 'Marathi',
-                'pu': 'Punjabi'
-            };
-            const langName = langMap[currentLang] || 'English';
+            // Mock response for testing
+            let reply = '₹2500 per quintal'; // Mock price
+            console.log('Mock price for', commodityName, ':', reply);
 
-            const prompt = `What is the current market price of ${commodityName} seeds in India? Respond only with the price in the format "₹[price] per [unit]" (e.g., ₹2500 per quintal) in ${langName} language. Do not add extra text.`;
-
-            const response = await fetch(`${MODEL_URL}?key=${API_KEY}`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    contents: [{ parts: [{ text: prompt }] }]
-                })
-            });
-
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-
-            const data = await response.json();
-            let reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || 'No price data available.';
-            // Clean the reply: remove markdown, extra spaces
-            reply = reply.replace(/\*\*/g, '').replace(/\n+/g, ' ').trim();
-            console.log('Gemini reply for price:', reply);
-
-            // Extract price using simple regex if needed (e.g., match ₹ followed by number)
-            const priceMatch = reply.match(/₹(\d+(?:\.\d+)?)/);
-            const displayPrice = priceMatch ? `₹${priceMatch[1]}` : reply;
-
-            if (marketPriceSpan) marketPriceSpan.textContent = displayPrice;
+            if (marketPriceSpan) marketPriceSpan.textContent = reply;
             if (lastUpdatedSpan) lastUpdatedSpan.textContent = new Date().toLocaleTimeString();
+
+            // Save to localStorage
+            localStorage.setItem('marketPrice_' + selectedCommodity, reply);
+
+            // Add link to Agmarknet for more prices
+            const lowestPriceLinkDiv = document.getElementById('lowest-price-link');
+            if (lowestPriceLinkDiv) {
+                lowestPriceLinkDiv.innerHTML = `<a href="https://agmarknet.gov.in/" target="_blank" class="text-decoration-none">Find more prices on Agmarknet</a>`;
+            }
         } catch (error) {
             console.error('Market price fetch error:', error);
             if (marketPriceSpan) marketPriceSpan.textContent = 'Error fetching price';
@@ -196,7 +225,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const langName = langMap[currentLang] || 'English';
 
             // Always provide for all soil types
-            const prompt = `Provide concise, practical fertilizer and soil management guidance for growing ${selectedCrop} on different soil types (sandy, clay, loamy, silt, peat, chalky). For each soil type, include recommended NPK ratios, application tips, and precautions. Respond in one structured paragraph in ${langName} language.`;
+            const prompt = `Provide concise, practical fertilizer and soil management guidance for growing ${selectedCrop} seeds on different soil types (sandy, clay, loamy, silt, peat, chalky). For each soil type, include recommended NPK ratios, application tips, and precautions. Respond in one structured paragraph in ${langName} language.`;
 
             const response = await fetch(`${MODEL_URL}?key=${API_KEY}`, {
                 method: 'POST',
@@ -310,7 +339,8 @@ document.addEventListener('DOMContentLoaded', () => {
             return 'Please provide a soil sample or details for a recommendation.';
         } else if (userQuery.includes('market')) {
             return 'What commodity price are you looking for?';
-        } else {
+        } 
+        else {
             return 'I am a basic bot right now, but I can assist with weather, soil, or market questions. How can I help?';
         }
     }

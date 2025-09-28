@@ -207,17 +207,4 @@ body {
     border-top: 1px solid #e0e0e0;
 }
 
-#market-price, #market-last-updated {
-    font-weight: bold;
-    font-size: 1.2rem;
-    color: var(--primary-color);
-    text-align: center;
-    padding: 0.5rem;
-    border-radius: 5px;
-    background-color: var(--card-background);
-}
 
-#market-price {
-    color: var(--accent-color);
-    font-size: 1.5rem;
-}
