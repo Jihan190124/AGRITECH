@@ -159,37 +159,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Weather Functionality ---
     async function fetchWeather(city) {
-        // Mock weather data to avoid API key issues (28°C, clear sky for Ahmedabad-like city)
-        const mockData = {
-            main: {
-                temp: 28,
-                feels_like: 30,
-                humidity: 65
-            },
-            weather: [{ description: 'clear sky' }],
-            name: city
-        };
+        const WEATHER_API_KEY = '4d69090228c9ef3603f610850dfaec59'; // Valid key
 
         try {
             weatherInfoDiv.innerHTML = '<div class="alert alert-info">Fetching weather...</div>';
-            // Simulate API delay
-            await new Promise(resolve => setTimeout(resolve, 1000));
 
-            const temp = Math.round(mockData.main.temp);
-            const description = mockData.weather[0].description;
-            const humidity = mockData.main.humidity;
-            const feelsLike = Math.round(mockData.main.feels_like);
+            const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${WEATHER_API_KEY}&units=metric`);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            const temp = Math.round(data.main.temp);
+            const description = data.weather[0].description;
+            const humidity = data.main.humidity;
+            const feelsLike = Math.round(data.main.feels_like);
 
             weatherInfoDiv.innerHTML = `
                 <div class="alert alert-success">
-                    <h5>${city}</h5>
+                    <h5>${data.name}</h5>
                     <p><strong>Temperature:</strong> ${temp}°C (Feels like: ${feelsLike}°C)</p>
                     <p><strong>Conditions:</strong> ${description}</p>
                     <p><strong>Humidity:</strong> ${humidity}%</p>
                 </div>
             `;
         } catch (error) {
-            weatherInfoDiv.innerHTML = `<div class="alert alert-danger">Error: ${error.message}. Please check the city name.</div>`;
+            weatherInfoDiv.innerHTML = `<div class="alert alert-danger">Error fetching weather: ${error.message}. Please check the API key or city name.</div>`;
             console.error('Weather fetch error:', error);
         }
     }
