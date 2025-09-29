@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const weatherInfoDiv = document.getElementById('weather-info');
 
     // Gemini API constants (same as chatbot.html)
-    const API_KEY = 'AIzaSyDni7XyK00_Ets6MoGoCBA6MZtk0_aW0VE';
+    const API_KEY = "AIzaSyCvCJfO2MtWa2zIPcB0sV1yD66plUAvtrc";
     const MODEL_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent";
     // Soil & Fertilizer Guidance
     const checkSoilBtn = document.getElementById('check-soil-btn');
@@ -256,22 +256,19 @@ document.addEventListener('DOMContentLoaded', () => {
         await new Promise(resolve => setTimeout(resolve, 2000));
 
         const currentLang = languageSelect.value;
-        let mockReply = 'The uploaded image shows healthy crop leaves with no visible signs of pests or diseases. To prevent issues, maintain proper irrigation, use organic pesticides like neem oil if needed, rotate crops, and monitor regularly for early detection. Ensure good air circulation to avoid fungal growth.';
-
-        // Simple language switch (full translation would need more logic)
-        const langMap = { 
-            'en': mockReply, 
-            'hi': 'अपलोड की गई छवि स्वस्थ फसल की पत्तियों को दिखाती है जिसमें कीटों या रोगों के कोई दृश्य संकेत नहीं हैं। मुद्दों को रोकने के लिए, उचित सिंचाई बनाए रखें, यदि आवश्यक हो तो नीम तेल जैसे जैविक कीटनाशकों का उपयोग करें, फसलों को घुमाएं, और प्रारंभिक पहचान के लिए नियमित रूप से निगरानी करें। फंगल विकास से बचने के लिए अच्छी हवा परिसंचरण सुनिश्चित करें।',
-            'gu': mockReply, 
-            'ma': mockReply, 
-            'pu': mockReply 
-        }; // Placeholder for other languages
-        const reply = langMap[currentLang] || mockReply;
+        let mockReply = '';
+        if (currentLang === 'en') {
+            mockReply = 'The uploaded image shows signs of plant stress or damage, possibly due to burning, nutrient deficiency, or environmental factors. Severity appears moderate. Recommended treatments include applying balanced NPK fertilizer (20:20:20), ensuring proper watering to avoid drought stress, and using mulch to retain soil moisture. Organic alternatives: neem oil spray for pest prevention and compost for soil health. Monitor closely and consult a local extension service for precise diagnosis.';
+        } else if (currentLang === 'hi') {
+            mockReply = 'अपलोड की गई छवि में पौधे की तनाव या क्षति के संकेत दिखाई दे रहे हैं, संभवतः जलने, पोषक तत्वों की कमी या पर्यावरणीय कारकों के कारण। गंभीरता मध्यम प्रतीत होती है। अनुशंसित उपचारों में संतुलित एनपीके उर्वरक (20:20:20) का प्रयोग, सूखे के तनाव से बचने के लिए उचित सिंचाई सुनिश्चित करना, और मिट्टी की नमी बनाए रखने के लिए मल्च का उपयोग शामिल है। जैविक विकल्प: कीट रोकथाम के लिए नीम तेल स्प्रे और मिट्टी के स्वास्थ्य के लिए कंपोस्ट। निकट से निगरानी करें और सटीक निदान के लिए स्थानीय विस्तार सेवा से सलाह लें।';
+        } else {
+            mockReply = 'The uploaded image shows signs of plant stress or damage, possibly due to burning or nutrient issues. Severity moderate. Apply NPK 20:20:20, ensure watering, use mulch. Organic: neem oil, compost. Monitor and consult experts.';
+        }
 
         pestResult.innerHTML = `
             <div class="alert alert-success">
                 <h6>Pest & Disease Analysis:</h6>
-                <p>${reply}</p>
+                <p>${mockReply}</p>
             </div>
         `;
     });
